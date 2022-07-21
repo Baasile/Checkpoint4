@@ -29,26 +29,20 @@ class TournamentController {
       });
   };
 
-  static edit = (req, res) => {
-    const tournament = req.bodt;
+  static edit = async (req, res) => {
+    try {
+      const object = req.body;
 
-    // TODO validations (length, format...)
-
-    tournament.id = parseInt(req.params.id, 10);
-
-    models.tournament
-      .update(tournament)
-      .then(([result]) => {
-        if (result.affectedRows === 0) {
-          res.sendStatus(404);
-        } else {
-          res.sendStatus(204);
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-        res.sendStatus(500);
+      const presentation = await models.tournament.update(object.id, {
+        date: object.date,
+        time: object.time,
       });
+
+      const result = await res.sendStatus(204);
+    } catch (err) {
+      console.error(err);
+      res.sendStatus(500);
+    }
   };
 
   static add = async (req, res) => {

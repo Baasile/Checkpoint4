@@ -29,5 +29,6 @@ router.get("/tournament", TournamentController.browse);
 router.get("/tournament/:id", TournamentController.read);
 router.delete("/tournament/:id", TournamentController.delete);
 router.post("/tournament", TournamentController.add);
+router.put("/tournament/:id", TournamentController.edit);
 
 module.exports = router;
