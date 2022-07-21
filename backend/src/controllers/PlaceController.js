@@ -1,11 +1,15 @@
 const models = require("../models");
 
-class TournamentController {
+class PlaceController {
   static browse = (req, res) => {
-    models.tournament
+    models.place
       .findAll()
-      .then(([rows]) => {
-        res.send(rows);
+      .then(([place]) => {
+        if (place[0]) {
+          res.status(200).json(place);
+        } else {
+          res.status(400).send("No place found");
+        }
       })
       .catch((err) => {
         console.error(err);
@@ -14,13 +18,13 @@ class TournamentController {
   };
 
   static read = (req, res) => {
-    models.tournament
+    models.place
       .find(req.params.id)
       .then(([rows]) => {
         if (rows[0] == null) {
-          res.sendStatus(404);
+          res.status(404).send("No place found");
         } else {
-          res.send(rows[0]);
+          res.status(200).json(rows[0]);
         }
       })
       .catch((err) => {
@@ -30,14 +34,14 @@ class TournamentController {
   };
 
   static edit = (req, res) => {
-    const tournament = req.bodt;
+    const place = req.body;
 
     // TODO validations (length, format...)
 
-    tournament.id = parseInt(req.params.id, 10);
+    place.id = parseInt(req.params.id, 10);
 
-    models.tournament
-      .update(tournament)
+    models.place
+      .update(place)
       .then(([result]) => {
         if (result.affectedRows === 0) {
           res.sendStatus(404);
@@ -51,28 +55,24 @@ class TournamentController {
       });
   };
 
-  static add = async (req, res) => {
-    try {
-      const tournament = await models.tournament.insert(req.body);
-      if (req.body.tournament) {
-        await Promise.all(
-          req.body.tournament.map((match) =>
-            models.tournament.insert({
-              ...match,
-              tournament_id: tournament[0].insertId,
-            })
-          )
-        );
-      }
-      res.status(201).send({ ...req.body, id: tournament[0].insertId });
-    } catch (err) {
-      console.error(err);
-      res.sendStatus(500);
-    }
+  static add = (req, res) => {
+    const place = req.body;
+
+    // TODO validations (length, format...)
+
+    models.place
+      .insert(place)
+      .then(([result]) => {
+        res.status(201).send({ ...place, id: result.insertId });
+      })
+      .catch((err) => {
+        console.error(err);
+        res.sendStatus(500);
+      });
   };
 
   static delete = (req, res) => {
-    models.tournament
+    models.place
       .delete(req.params.id)
       .then(() => {
         res.sendStatus(204);
@@ -84,4 +84,4 @@ class TournamentController {
   };
 }
 
-module.exports = TournamentController;
+module.exports = PlaceController;

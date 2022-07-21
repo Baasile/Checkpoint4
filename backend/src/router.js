@@ -1,6 +1,12 @@
 const express = require("express");
 
-const { ItemController, TournamentController, PlayerController } = require("./controllers");
+const {
+  ItemController,
+  TournamentController,
+  PlayerController,
+  PlaceController,
+  LevelController,
+} = require("./controllers");
 
 const router = express.Router();
 
@@ -12,6 +18,12 @@ router.delete("/items/:id", ItemController.delete);
 
 router.get("/player", PlayerController.browse);
 router.get("/player/:id", PlayerController.read);
+
+router.get("/places", PlaceController.browse);
+router.get("/places/:id", PlaceController.read);
+
+router.get("/level", LevelController.browse);
+router.get("/level/:id", LevelController.read);
 
 router.get("/tournament", TournamentController.browse);
 router.get("/tournament/:id", TournamentController.read);

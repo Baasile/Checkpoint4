@@ -15,15 +15,34 @@ CREATE SCHEMA IF NOT EXISTS `league` DEFAULT CHARACTER SET utf8 ;
 USE `league` ;
 
 -- -----------------------------------------------------
+-- Table `league`.`level`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `league`.`level` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `level` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `league`.`place`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `league`.`place` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `five_center` VARCHAR(155) NOT NULL,
+  `city` VARCHAR(155) NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `league`.`player`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `league`.`player` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(45) NOT NULL,
-  `lastname` VARCHAR(45) NULL,
+  `firstname` VARCHAR(45) NOT NULL,
+  `lastname` VARCHAR(45) NOT NULL,
   `phone` INT NULL,
-  `mail` VARCHAR(155) NULL,
-  `profil_picture` VARCHAR(512) NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -33,70 +52,91 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `league`.`tournament` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `date` DATE NOT NULL,
-  `place` VARCHAR(45) NOT NULL,
-  `winner` VARCHAR(45) NULL,
-  `second` VARCHAR(45) NULL,
-  `third` VARCHAR(45) NULL,
-  `last` VARCHAR(45) NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `league`.`team`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `league`.`team` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(155) NULL,
-  `player1` VARCHAR(45) NULL,
-  `player2` VARCHAR(45) NULL,
-  `player3` VARCHAR(45) NULL,
-  `player4` VARCHAR(45) NULL,
-  `player5` VARCHAR(45) NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `league`.`team_has_player`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `league`.`team_has_player` (
-  `team_id` INT NOT NULL,
-  `player_id` INT NOT NULL,
-  PRIMARY KEY (`team_id`, `player_id`),
-  INDEX `fk_team_has_player_player1_idx` (`player_id` ASC) VISIBLE,
-  INDEX `fk_team_has_player_team_idx` (`team_id` ASC) VISIBLE,
-  CONSTRAINT `fk_team_has_player_team`
-    FOREIGN KEY (`team_id`)
-    REFERENCES `league`.`team` (`id`)
+  `date` VARCHAR(45) NOT NULL,
+  `time` VARCHAR(45) NOT NULL,
+  `level_id` INT NOT NULL,
+  `place_id` INT NOT NULL,
+  `player1_id` INT NULL,
+  `player2_id` INT NULL,
+  `player3_id` INT NULL,
+  `player4_id` INT NULL,
+  `player5_id` INT NULL,
+  `player6_id` INT NULL,
+  `player7_id` INT NULL,
+  `player8_id` INT NULL,
+  `player9_id` INT NULL,
+  `player10_id` INT NULL,
+  PRIMARY KEY (`id`, `level_id`, `place_id`),
+  INDEX `fk_tournament_level1_idx` (`level_id` ASC) VISIBLE,
+  INDEX `fk_tournament_place1_idx` (`place_id` ASC) VISIBLE,
+  INDEX `fk_tournament_player1_idx` (`player1_id` ASC) VISIBLE,
+  INDEX `fk_tournament_player2_idx` (`player2_id` ASC) VISIBLE,
+  INDEX `fk_tournament_player3_idx` (`player3_id` ASC) VISIBLE,
+  INDEX `fk_tournament_player4_idx` (`player4_id` ASC) VISIBLE,
+  INDEX `fk_tournament_player5_idx` (`player5_id` ASC) VISIBLE,
+  INDEX `fk_tournament_player6_idx` (`player6_id` ASC) VISIBLE,
+  INDEX `fk_tournament_player7_idx` (`player7_id` ASC) VISIBLE,
+  INDEX `fk_tournament_player8_idx` (`player8_id` ASC) VISIBLE,
+  INDEX `fk_tournament_player9_idx` (`player9_id` ASC) VISIBLE,
+  INDEX `fk_tournament_player10_idx` (`player10_id` ASC) VISIBLE,
+  CONSTRAINT `fk_tournament_level1`
+    FOREIGN KEY (`level_id`)
+    REFERENCES `league`.`level` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_team_has_player_player1`
-    FOREIGN KEY (`player_id`)
+  CONSTRAINT `fk_tournament_place1`
+    FOREIGN KEY (`place_id`)
+    REFERENCES `league`.`place` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_tournament_player1`
+    FOREIGN KEY (`player1_id`)
     REFERENCES `league`.`player` (`id`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `league`.`tournament_has_team`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `league`.`tournament_has_team` (
-  `tournament_id` INT NOT NULL,
-  `team_id` INT NOT NULL,
-  PRIMARY KEY (`tournament_id`, `team_id`),
-  INDEX `fk_tournament_has_team_team1_idx` (`team_id` ASC) VISIBLE,
-  INDEX `fk_tournament_has_team_tournament1_idx` (`tournament_id` ASC) VISIBLE,
-  CONSTRAINT `fk_tournament_has_team_tournament1`
-    FOREIGN KEY (`tournament_id`)
-    REFERENCES `league`.`tournament` (`id`)
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_tournament_player2`
+    FOREIGN KEY (`player2_id`)
+    REFERENCES `league`.`player` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_tournament_has_team_team1`
-    FOREIGN KEY (`team_id`)
-    REFERENCES `league`.`team` (`id`)
+  CONSTRAINT `fk_tournament_player3`
+    FOREIGN KEY (`player3_id`)
+    REFERENCES `league`.`player` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_tournament_player4`
+    FOREIGN KEY (`player4_id`)
+    REFERENCES `league`.`player` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_tournament_player5`
+    FOREIGN KEY (`player5_id`)
+    REFERENCES `league`.`player` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_tournament_player6`
+    FOREIGN KEY (`player6_id`)
+    REFERENCES `league`.`player` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_tournament_player7`
+    FOREIGN KEY (`player7_id`)
+    REFERENCES `league`.`player` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_tournament_player8`
+    FOREIGN KEY (`player8_id`)
+    REFERENCES `league`.`player` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_tournament_player9`
+    FOREIGN KEY (`player9_id`)
+    REFERENCES `league`.`player` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_tournament_player10`
+    FOREIGN KEY (`player10_id`)
+    REFERENCES `league`.`player` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

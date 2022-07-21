@@ -1,11 +1,15 @@
 const models = require("../models");
 
-class PlayerController {
+class LevelController {
   static browse = (req, res) => {
-    models.player
+    models.level
       .findAll()
-      .then(([rows]) => {
-        res.send(rows);
+      .then(([level]) => {
+        if (level[0]) {
+          res.status(200).json(level);
+        } else {
+          res.status(400).send("No level found");
+        }
       })
       .catch((err) => {
         console.error(err);
@@ -14,25 +18,13 @@ class PlayerController {
   };
 
   static read = (req, res) => {
-    models.player
+    models.level
       .find(req.params.id)
-      .then(([pers]) => {
-        if (pers[0] == null) {
-          res.status(404).send("Player not found");
+      .then(([level]) => {
+        if (level[0] == null) {
+          res.status(404).send("No level found");
         } else {
-          models.tournament
-            .findById(pers[0].id)
-            .then(([tournament]) => {
-              const result = {
-                ...pers[0],
-                tournament,
-              };
-              res.status(200).json(result);
-            })
-            .catch((err) => {
-              console.error(err);
-              res.sendStatus(500);
-            });
+          res.status(200).json(level[0]);
         }
       })
       .catch((err) => {
@@ -42,14 +34,14 @@ class PlayerController {
   };
 
   static edit = (req, res) => {
-    const player = req.body;
+    const level = req.body;
 
     // TODO validations (length, format...)
 
-    player.id = parseInt(req.params.id, 10);
+    level.id = parseInt(req.params.id, 10);
 
-    models.player
-      .update(player)
+    models.level
+      .update(level)
       .then(([result]) => {
         if (result.affectedRows === 0) {
           res.sendStatus(404);
@@ -64,14 +56,14 @@ class PlayerController {
   };
 
   static add = (req, res) => {
-    const player = req.body;
+    const level = req.body;
 
     // TODO validations (length, format...)
 
-    models.player
-      .insert(player)
+    models.level
+      .insert(level)
       .then(([result]) => {
-        res.status(201).send({ ...player, id: result.insertId });
+        res.status(201).send({ ...level, id: result.insertId });
       })
       .catch((err) => {
         console.error(err);
@@ -80,7 +72,7 @@ class PlayerController {
   };
 
   static delete = (req, res) => {
-    models.player
+    models.level
       .delete(req.params.id)
       .then(() => {
         res.sendStatus(204);
@@ -92,4 +84,4 @@ class PlayerController {
   };
 }
 
-module.exports = PlayerController;
+module.exports = LevelController;
