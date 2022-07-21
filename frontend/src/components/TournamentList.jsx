@@ -3,22 +3,22 @@ import { useEffect, useState } from "react";
 
 function TournamentList() {
   const [showModal, setModal] = useState(false);
-  const [data, setData] = useState([]);
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
   const [id, setId] = useState("");
+  const [data, setData] = useState([]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const data = {
-      id,
-      date,
-      time,
+    const datab = {
+      id: id,
+      date: date,
+      time: time,
     };
     axios
-      .put(`http://localhost:5000/tournament/${id}`, data)
+      .put(`http://localhost:5000/tournament/${id}`, datab)
       .then(() => {
-        console.warn("Yes", data);
+        console.warn("Yes", datab);
       })
       .catch((error) => {
         console.warn("No !", error);
@@ -32,6 +32,7 @@ function TournamentList() {
         setId(response.data.id);
         setDate(response.data.date);
         setTime(response.data.time);
+        console.log(data)
       })
       .catch((error) => {
         console.warn(error);
@@ -84,7 +85,7 @@ function TournamentList() {
                   <div className="flex justify-around">
                     <div>
                       <h1>Equipe 1</h1>
-                      <h2>{tournament.player1}</h2>
+                      <h2>{tournament.player1_id}</h2>
                       <h2>{tournament.player2}</h2>
                       <h2>{tournament.player3}</h2>
                       <h2>{tournament.player4}</h2>
@@ -124,7 +125,7 @@ function TournamentList() {
                               className="text-black shadow-sm ml-4 border-2 rounded-md"
                               type="text"
                               id="date"
-                              value={tournament.date}
+                              value={date && date}
                               name="date"
                               onChange={(event) => setDate(event.target.value)}
                             />
@@ -138,9 +139,9 @@ function TournamentList() {
                               className="text-black shadow-sm ml-4 border-2 rounded-md"
                               type="text"
                               id="time"
-                              value={tournament.time}
+                              value={time && time}
                               name="time"
-                              onChange={(event) => setTime(event.target.value)}
+                              onChange={(e) => setTime(e.target.value)}
                             />
                           </label>
 

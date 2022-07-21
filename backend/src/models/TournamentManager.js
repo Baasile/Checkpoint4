@@ -45,7 +45,7 @@ class TournamentManager extends AbstractManager {
 
   insert(tournament) {
     return this.connection.query(
-      `insert into ${TournamentManager.table} (date, time, level_id, place_id) values (?, ?, ?, ?) where id = ?`,
+      `insert into ${TournamentManager.table} (date, time, level_id, place_id) values (?, ?, ?, ?) `,
       [
         tournament.date,
         tournament.time,
