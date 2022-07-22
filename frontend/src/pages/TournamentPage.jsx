@@ -1,13 +1,16 @@
+import React from "react";
 import Navbar from "../components/Navbar";
+import TournamentList from "../components/TournamentList";
 import Footer from "../components/Footer";
-import Actu from "../components/Actu";
 
-export default function Home() {
+function TournamentPage() {
   return (
     <div className="">
       <Navbar />
-      <Actu />
+      <TournamentList />
       <Footer />
     </div>
   );
 }
+
+export default TournamentPage;
