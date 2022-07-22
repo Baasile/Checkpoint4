@@ -20,13 +20,11 @@ function FormTournament() {
     setmatch(provisoireMatch);
   };
 
-
   const updatePlace = (event) => {
     const provisoirePlace = places;
     provisoirePlace[event.target.name] = event.target.value;
 
-    //console.log("event target object: " + provisoirePlace);
-
+    // console.log("event target object: " + provisoirePlace);
   };
 
   const updateLevel = (event) => {
@@ -49,11 +47,9 @@ function FormTournament() {
       .then((res) => {
         console.log(res.data);
         setPlaces(res.data);
-        
       })
       .catch((err) => console.error(err));
   }, []);
-
 
   const createTournament = () => {
     if (
@@ -71,7 +67,6 @@ function FormTournament() {
     }
   };
 
-
   return (
     <div>
       <button
@@ -82,65 +77,44 @@ function FormTournament() {
         Ajouter un match
       </button>
       {showModal ? (
-        <div className="tout le  formulaire">
-          <div className="border-2 border-blue-400 flex justify-center">
-            <form className="border-4 border-yellow-300 bg-gray-800 text-yellow-300 font-bold shadow-md flex flex-col my-10 rounded-xl justify-center">
-              <div className="flex flex-col justify-center ">
-                <h1 className="border-b-2 py-4 mb-10 flex justify-center">
-                  Créer un match
-                </h1>
-                <label
-                  className="my-2 flex justify-between px-4"
-                  htmlFor="date"
-                >
-                  Date :
-                  <input
-                    className="text-black shadow-sm ml-4 border-2 rounded-md"
-                    type="text"
-                    id="date"
-                    value={match.date}
-                    name="date"
-                    onChange={(event) => updateMatch(event)}
-                  />
-                </label>
-                <label
-                  className="my-2 flex justify-between px-4"
-                  htmlFor="time"
-                >
-                  Heure :
-                  <input
-                    className="text-black shadow-sm ml-4 border-2 rounded-md"
-                    type="text"
-                    id="time"
-                    value={match.time}
-                    name="time"
-                    onChange={(event) => updateMatch(event)}
-                  />
-                </label>
-                <select
-                  onChange={(event) => updatePlace(event)}
-                  name="places_id"
-                >
-                  selection le lieu
-                  {places &&
-                    places.map((place) => (
-                      <option value={place.id}>
-                        {place.five_center}, {place.city}
-                      </option>
-                    ))}
-
-                </select>
-                <select
-                  onChange={(event) => updateLevel(event)}
-                  name="level_id"
-                >
-                  selection le niveau
-                  {/* {levels &&
-                    levels.map((level) => (
-                      <option value={level.id}>{level.level}</option>
-                    ))} */}
-                </select>
-                {/* <label
+        <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+          <div className="relative w-auto my-6 mx-auto max-w-3xl">
+            <div className="tout le  formulaire">
+              <div className="flex justify-center">
+                <form className="border-4 border-yellow-300 bg-gray-800 text-yellow-300 font-bold shadow-md flex flex-col my-10 rounded-xl justify-center">
+                  <div className="flex flex-col justify-center ">
+                    <h1 className="border-b-2 py-4 mb-10 flex justify-center">
+                      Créer un match
+                    </h1>
+                    <label
+                      className="my-2 flex justify-between px-4"
+                      htmlFor="date"
+                    >
+                      Date :
+                      <input
+                        className="text-black shadow-sm ml-4 border-2 rounded-md"
+                        type="text"
+                        id="date"
+                        value={match.date}
+                        name="date"
+                        onChange={(event) => updateMatch(event)}
+                      />
+                    </label>
+                    <label
+                      className="my-2 flex justify-between px-4"
+                      htmlFor="time"
+                    >
+                      Heure :
+                      <input
+                        className="text-black shadow-sm ml-4 border-2 rounded-md "
+                        type="text"
+                        id="time"
+                        value={match.time}
+                        name="time"
+                        onChange={(event) => updateMatch(event)}
+                      />
+                    </label>
+                    {/* <label
                   className="my-2 flex justify-between px-4"
                   htmlFor="level_id"
                 >
@@ -153,8 +127,37 @@ function FormTournament() {
                     name="level_id"
                     onChange={(event) => updateMatch(event)}
                   />
-                </label>
-                <label
+                </label> */}
+                    <div className="flex ml-4 justify-between">
+                      <p className="mr-9">Lieu: </p>
+                      <select
+                        className="text-black shadow-sm mr-4 border-2 rounded-md w-4/5 my-2"
+                        onChange={(event) => updatePlace(event)}
+                        name="places_id"
+                      >
+                        {places &&
+                          places.map((place) => (
+                            <option value={place.id}>
+                              {place.five_center}, {place.city}
+                            </option>
+                          ))}
+                      </select>
+                    </div>
+                    <div className="flex ml-4 justify-between">
+                      <p className="mr-5">Niveau: </p>
+                      <select
+                        className="text-black shadow-sm mr-4 border-2 rounded-md w-4/5 my-2"
+                        onChange={(event) => updateLevel(event)}
+                        name="level_id"
+                      >
+                        selection le niveau
+                        {levels &&
+                          levels.map((level) => (
+                            <option value={level.id}>{level.level}</option>
+                          ))}
+                      </select>
+                    </div>
+                    {/* <label
                   className="my-2 flex justify-between px-4"
                   htmlFor="place_id"
                 >
@@ -167,8 +170,8 @@ function FormTournament() {
                     name="place_id"
                     onChange={(event) => updateMatch(event)}
                   />
-                </label> */}
-                {/* <label className="my-2 flex justify-between px-4" htmlFor="player_id">
+                </label>  */}
+                    {/* <label className="my-2 flex justify-between px-4" htmlFor="player_id">
             Joueurs inscrits :
             <input
               className="text-black shadow-sm ml-4 border-2 rounded-md"
@@ -179,28 +182,30 @@ function FormTournament() {
               onChange={(event) => updateMatch(event)}
             />
           </label> */}
-                <div className="flex flex-col justify-center">
-                  <p className="text-sm">{msg}</p>
-                  <div className="flex justify-around">
-                    <button
-                      className="my-4 w-1/4 items-center rounded-full  text-gray-800 bg-yellow-300 active:bg-gray-800 active:text-yellow-300 shadow-sm shadow-black  "
-                      type="button"
-                      onClick={() => setShowModal(false)}
-                    >
-                      Annuler
-                    </button>
-                    <button
-                      type="button"
-                      className="my-4 w-2/3 items-center rounded-full  text-gray-800 bg-yellow-300 active:bg-gray-800 active:text-yellow-300 shadow-sm shadow-black  "
-                      onClick={createTournament}
-                    >
-                      {" "}
-                      Créer le match{" "}
-                    </button>
+                    <div className="flex flex-col justify-center">
+                      <p className="text-sm">{msg}</p>
+                      <div className="flex justify-around">
+                        <button
+                          className="my-4 w-1/4 items-center rounded-full  text-gray-800 bg-yellow-300 active:bg-gray-800 active:text-yellow-300 shadow-sm shadow-black  "
+                          type="button"
+                          onClick={() => setShowModal(false)}
+                        >
+                          Annuler
+                        </button>
+                        <button
+                          type="button"
+                          className="my-4 w-2/3 items-center rounded-full  text-gray-800 bg-yellow-300 active:bg-gray-800 active:text-yellow-300 shadow-sm shadow-black  "
+                          onClick={createTournament}
+                        >
+                          {" "}
+                          Créer le match{" "}
+                        </button>
+                      </div>
+                    </div>
                   </div>
-                </div>
+                </form>
               </div>
-            </form>
+            </div>
           </div>
         </div>
       ) : null}
