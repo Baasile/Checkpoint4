@@ -37,7 +37,6 @@ function FormTournament() {
     axios
       .get("http://localhost:5000/level/")
       .then((res) => {
-        console.log(res.data);
         setLevel(res.data);
       })
       .catch((err) => console.error(err));
@@ -45,7 +44,6 @@ function FormTournament() {
     axios
       .get("http://localhost:5000/places/")
       .then((res) => {
-        console.log(res.data);
         setPlaces(res.data);
       })
       .catch((err) => console.error(err));
@@ -60,7 +58,7 @@ function FormTournament() {
     ) {
       axios
         .post(`http://localhost:5000/tournament`, match)
-        .then((res) => console.log(res))
+        .then((res) => console.warn(res))
         .catch((err) => console.error(err));
     } else {
       setMsg("*Tous les champs sont obligatoires");
