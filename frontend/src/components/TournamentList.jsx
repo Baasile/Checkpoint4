@@ -39,15 +39,6 @@ function TournamentList() {
       });
   }, []);
 
-  const deleteTournament = (id) => {
-    console.log(deleteTournament);
-    console.log(id);
-    axios
-      .delete(`http://localhost:5000/tournament/${id}`)
-      .then((res) => console.log(res.data))
-      .catch((err) => console.error(err));
-  };
-
   // const updateAPIData = (id) => {
   //   console.log({ date, time });
   //   axios
@@ -62,17 +53,17 @@ function TournamentList() {
 
   return (
     <div className="flex justify-center">
-      <div className="bg-gray-500 my-10 py-10 mx-2 w-full lg:w-4/5 rounded-xl shadow-xl">
+      <div className="bg-slate-100 my-10 lg:px-6 py-10 mx-2 w-full lg:w-4/5 rounded-xl shadow-xl">
         <h1 className="border-2 text-2xl font-bold flex justify-center">
-          Trouvez votre match
+          Liste des rencontres
         </h1>
         {data &&
           data.map((tournament) => {
             return (
-              <div className="border-2 border-red-400 flex justify-center">
-                <div className="flex flex-col lg:flex-row justify-around items-center border-2 w-full  border-blue-400">
-                  <details className="border-2 border-blue-600 bg-gray-800 text-yellow-300 text-lg w-full">
-                    <summary className="border-2 border-green-400 flex flex-col text-center lg:flex-row justify-evenly ">
+              <div className="flex justify-center">
+                <div className="flex flex-col lg:flex-row justify-around items-center  w-full ">
+                  <details className=" bg-gray-800 text-yellow-300 rounded-xl text-lg w-full">
+                    <summary className="flex flex-col text-center border-2 border-yellow-400 lg:flex-row justify-evenly ">
                       <p className=" lg:w-1/6">{tournament.date}</p>
                       <p className=" lg:w-1/6">à {tournament.time} </p>
                       <p className=" lg:w-2/6">au {tournament.five_center} </p>
@@ -92,9 +83,9 @@ function TournamentList() {
                         <h1 className="font-bold">Equipe 2</h1>
                         <h2>Bart</h2>
                         <h2>Homer</h2>
-                        <h2>Lisa</h2>
-                        <h2>Marge</h2>
-                        <h2>Maggie</h2>
+                        <h2>Libre</h2>
+                        <h2>Libre</h2>
+                        <h2>Libre</h2>
                       </div>
                       {/* <div>
                         <h2>{tournament.player6}</h2>
@@ -106,131 +97,15 @@ function TournamentList() {
                     </div>
                   </details>
                   <div />
-                  <div className="w-full lg:w-1/4 border-2 flex justify-end">
+                  <div className="w-full lg:w-1/4 my-1 flex justify-center">
                     <button
-                      className="bg-gray-800 text-yellow-300 active:bg-yellow-300 font-bold uppercase text-xs lg:text-sm px-2 lg:px-6 py-1 lg:py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 ml-4 ease-linear transition-all duration-150 "
+                      className="bg-gray-800 text-yellow-300 active:bg-yellow-300 font-bold uppercase text-xs lg:text-sm px-2 lg:px-4 py-1 lg:py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 ml-4 ease-linear transition-all duration-150 "
                       type="button"
-                      onClick={() => setModal(true)}
                     >
-                      Modifier
-                    </button>
-                    <button
-                      className="bg-gray-800 text-yellow-300 active:bg-yellow-300 font-bold uppercase text-xs lg:text-sm px-2 lg:px-6 py-1 lg:py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 ml-4 ease-linear transition-all duration-150"
-                      type="button"
-                      onClick={() => deleteTournament(tournament.id)}
-                    >
-                      supprimer
+                      M'inscrire
                     </button>
                   </div>
                 </div>
-                {showModal ? (
-                  <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
-                    <div className="relative w-auto my-6 mx-auto max-w-3xl">
-                      <div className="flex justify-center">
-                        <form className="border-4 border-yellow-300 bg-gray-800 text-yellow-300 font-bold shadow-md flex flex-col my-10 rounded-xl justify-center">
-                          <div className="flex flex-col justify-center ">
-                            <h1 className="border-b-2 py-4 mb-10 flex justify-center">
-                              Match du {tournament.date},
-                            </h1>
-                            <label
-                              className="my-2 flex justify-between px-4"
-                              htmlFor="date"
-                            >
-                              Date :
-                              <input
-                                className="text-black shadow-sm ml-4 border-2 rounded-md"
-                                type="text"
-                                id="date"
-                                value={date && date}
-                                name="date"
-                                onChange={(event) =>
-                                  setDate(event.target.value)
-                                }
-                              />
-                            </label>
-                            <label
-                              className="my-2 flex justify-between px-4"
-                              htmlFor="time"
-                            >
-                              Heure :
-                              <input
-                                className="text-black shadow-sm ml-4 border-2 rounded-md"
-                                type="text"
-                                id="time"
-                                value={time && time}
-                                name="time"
-                                onChange={(e) => setTime(e.target.value)}
-                              />
-                            </label>
-                            <label
-                              className="my-2 flex justify-between px-4"
-                              htmlFor="time"
-                            >
-                              Centre :
-                              <input
-                                className="text-black shadow-sm ml-4 border-2 rounded-md"
-                                type="text"
-                                id="time"
-                                value={time && time}
-                                name="time"
-                                onChange={(e) => setTime(e.target.value)}
-                              />
-                            </label>
-                            <label
-                              className="my-2 flex justify-between px-4"
-                              htmlFor="time"
-                            >
-                              Ville :
-                              <input
-                                className="text-black shadow-sm ml-4 border-2 rounded-md"
-                                type="text"
-                                id="time"
-                                value={time && time}
-                                name="time"
-                                onChange={(e) => setTime(e.target.value)}
-                              />
-                            </label>
-                            <label
-                              className="my-2 flex justify-between px-4"
-                              htmlFor="time"
-                            >
-                              Niveau :
-                              <input
-                                className="text-black shadow-sm ml-4 border-2 rounded-md"
-                                type="text"
-                                id="time"
-                                value={time && time}
-                                name="time"
-                                onChange={(e) => setTime(e.target.value)}
-                              />
-                            </label>
-
-                            <div className="flex flex-col justify-center">
-                              <div className="flex justify-around">
-                                <button
-                                  className="my-4 w-1/4 items-center rounded-full  text-gray-800 bg-yellow-300 active:bg-gray-800 active:text-yellow-300 shadow-sm shadow-black  "
-                                  type="button"
-                                  onClick={() => setModal(false)}
-                                >
-                                  Annuler
-                                </button>
-                                <button
-                                  type="button"
-                                  className="my-4 w-2/3 items-center rounded-full  text-gray-800 bg-yellow-300 active:bg-gray-800 active:text-yellow-300 shadow-sm shadow-black  "
-                                  onClick={(e) => handleSubmit(e)}
-                                >
-                                  Modifier le match
-                                </button>
-                              </div>
-                            </div>
-                          </div>
-                        </form>
-                      </div>
-                    </div>
-                    {/* <div className="opacity-20 fixed inset-0 z-40 bg-gray-800">
-                    </div> */}
-                  </div>
-                ) : null}
               </div>
             );
           })}

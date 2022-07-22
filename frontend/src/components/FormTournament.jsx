@@ -68,7 +68,7 @@ function FormTournament() {
   };
 
   return (
-    <div>
+    <div className="flex justify-end mt-4">
       <button
         className="bg-gray-800 text-yellow-300 active:bg-yellow-300 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
         type="button"

@@ -1,4 +1,4 @@
-function TournamentList() {
+function TournamentDetails() {
   return (
     <div>
       <div className="border-2 border-blue-400 flex flex-col w-2/3 justify-center justify-around">
@@ -49,4 +49,4 @@ function TournamentList() {
   );
 }
 
-export default TournamentList;
+export default TournamentDetails;
