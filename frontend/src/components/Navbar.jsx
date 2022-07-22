@@ -35,6 +35,12 @@ function Nav() {
                   >
                     Historique
                   </NavLink>
+                  <NavLink
+                    className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                    to="/admin"
+                  >
+                    Gestion des Matchs
+                  </NavLink>
                 </div>
               </div>
             </div>
@@ -114,6 +120,12 @@ function Nav() {
                   to="/historique"
                 >
                   Historique
+                </NavLink>
+                <NavLink
+                  className="hover:bg-gray-700 text-white block px-3 py-2 rounded-md text-base font-medium"
+                  to="/admin"
+                >
+                  Gestion des matchs
                 </NavLink>
               </div>
             </div>

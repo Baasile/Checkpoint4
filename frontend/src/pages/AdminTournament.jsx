@@ -1,16 +1,16 @@
 import React from "react";
 import Navbar from "../components/Navbar";
-import TournamentList from "../components/TournamentList";
+import TournamentListAdmin from "../components/TournamentListAdmin";
 import Footer from "../components/Footer";
 
-function TournamentPage() {
+function TournamentPageAdmin() {
   return (
     <div className="">
       <Navbar />
-      <TournamentList />
+      <TournamentListAdmin />
       <Footer />
     </div>
   );
 }
 
-export default TournamentPage;
+export default TournamentPageAdmin;
