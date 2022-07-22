@@ -11,9 +11,9 @@ function TournamentList() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const datab = {
-      id: id,
-      date: date,
-      time: time,
+      id,
+      date,
+      time,
     };
     axios
       .put(`http://localhost:5000/tournament/${id}`, datab)
@@ -32,7 +32,7 @@ function TournamentList() {
         setId(response.data.id);
         setDate(response.data.date);
         setTime(response.data.time);
-        console.log(data)
+        console.log(data);
       })
       .catch((error) => {
         console.warn(error);
@@ -61,112 +61,174 @@ function TournamentList() {
   // }
 
   return (
-    <div className="p-10 bg-red-400 flex justify-center">
-      <div className="bg-green-400 w-2/3">
-        <h1 className="border-2 flex justify-center">Liste des matchs</h1>
+    <div className="flex justify-center">
+      <div className="bg-gray-500 my-10 py-10 mx-2 w-full lg:w-4/5 rounded-xl shadow-xl">
+        <h1 className="border-2 text-2xl font-bold flex justify-center">
+          Trouvez votre match
+        </h1>
         {data &&
           data.map((tournament) => {
             return (
-              <div className="flex justify-center border-2 border-blue-400">
-                <button
-                  className="bg-gray-800 text-yellow-300 active:bg-yellow-300 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                  type="button"
-                  onClick={() => deleteTournament(tournament.id)}
-                >
-                  supprimer
-                </button>
-                <details>
-                  <summary>
-                    <p>
-                      {tournament.date}, {tournament.time}{" "}
-                      {tournament.five_center} niveau :{tournament.level}
-                    </p>
-                  </summary>
-                  <div className="flex justify-around">
-                    <div>
-                      <h1>Equipe 1</h1>
-                      <h2>{tournament.player1_id}</h2>
-                      <h2>{tournament.player2}</h2>
-                      <h2>{tournament.player3}</h2>
-                      <h2>{tournament.player4}</h2>
-                      <h2>{tournament.player5}</h2>
+              <div className="border-2 border-red-400 flex justify-center">
+                <div className="flex flex-col lg:flex-row justify-around items-center border-2 w-full  border-blue-400">
+                  <details className="border-2 border-blue-600 bg-gray-800 text-yellow-300 text-lg w-full">
+                    <summary className="border-2 border-green-400 flex flex-col text-center lg:flex-row justify-evenly ">
+                      <p className=" lg:w-1/6">{tournament.date}</p>
+                      <p className=" lg:w-1/6">à {tournament.time} </p>
+                      <p className=" lg:w-2/6">au {tournament.five_center} </p>
+                      <p className=" lg:w-2/6">de {tournament.city} </p>
+                      <p className=" lg:w-2/5"> Niveau: {tournament.level}</p>
+                    </summary>
+                    <div className="bg-gray-800 text-yellow-300 border-l-2 border-r-2 border-b-2 border-yellow-300 flex justify-around">
+                      <div>
+                        <h1 className="font-bold">Equipe 1</h1>
+                        <h2>Eric</h2>
+                        <h2>Kyle</h2>
+                        <h2>Stan</h2>
+                        <h2>Kenny</h2>
+                        <h2>Chef</h2>
+                      </div>
+                      <div>
+                        <h1 className="font-bold">Equipe 2</h1>
+                        <h2>Bart</h2>
+                        <h2>Homer</h2>
+                        <h2>Lisa</h2>
+                        <h2>Marge</h2>
+                        <h2>Maggie</h2>
+                      </div>
+                      {/* <div>
+                        <h2>{tournament.player6}</h2>
+                        <h2>{tournament.player7}</h2>
+                        <h2>{tournament.player8}</h2>
+                        <h2>{tournament.player9}</h2>
+                        <h2>{tournament.player10}</h2>
+                      </div> */}
                     </div>
-                    <div>
-                      <h2>{tournament.player6}</h2>
-                      <h2>{tournament.player7}</h2>
-                      <h2>{tournament.player8}</h2>
-                      <h2>{tournament.player9}</h2>
-                      <h2>{tournament.player10}</h2>
-                    </div>
+                  </details>
+                  <div />
+                  <div className="w-full lg:w-1/4 border-2 flex justify-end">
+                    <button
+                      className="bg-gray-800 text-yellow-300 active:bg-yellow-300 font-bold uppercase text-xs lg:text-sm px-2 lg:px-6 py-1 lg:py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 ml-4 ease-linear transition-all duration-150 "
+                      type="button"
+                      onClick={() => setModal(true)}
+                    >
+                      Modifier
+                    </button>
+                    <button
+                      className="bg-gray-800 text-yellow-300 active:bg-yellow-300 font-bold uppercase text-xs lg:text-sm px-2 lg:px-6 py-1 lg:py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 ml-4 ease-linear transition-all duration-150"
+                      type="button"
+                      onClick={() => deleteTournament(tournament.id)}
+                    >
+                      supprimer
+                    </button>
                   </div>
-                </details>
-                <div />
-                <button
-                  className="bg-gray-800 text-yellow-300 active:bg-yellow-300 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 m-6"
-                  type="button"
-                  onClick={() => setModal(true)}
-                >
-                  Modifier
-                </button>
+                </div>
                 {showModal ? (
-                  <div className="tout le  formulaire">
-                    <div className="border-2 border-blue-400 flex justify-center">
-                      <form className="border-4 border-yellow-300 bg-gray-800 text-yellow-300 font-bold shadow-md flex flex-col my-10 rounded-xl justify-center">
-                        <div className="flex flex-col justify-center ">
-                          <h1 className="border-b-2 py-4 mb-10 flex justify-center">
-                            {tournament.date}, {tournament.id}
-                          </h1>
-                          <label
-                            className="my-2 flex justify-between px-4"
-                            htmlFor="date"
-                          >
-                            Date :
-                            <input
-                              className="text-black shadow-sm ml-4 border-2 rounded-md"
-                              type="text"
-                              id="date"
-                              value={date && date}
-                              name="date"
-                              onChange={(event) => setDate(event.target.value)}
-                            />
-                          </label>
-                          <label
-                            className="my-2 flex justify-between px-4"
-                            htmlFor="time"
-                          >
-                            Heure :
-                            <input
-                              className="text-black shadow-sm ml-4 border-2 rounded-md"
-                              type="text"
-                              id="time"
-                              value={time && time}
-                              name="time"
-                              onChange={(e) => setTime(e.target.value)}
-                            />
-                          </label>
+                  <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+                    <div className="relative w-auto my-6 mx-auto max-w-3xl">
+                      <div className="flex justify-center">
+                        <form className="border-4 border-yellow-300 bg-gray-800 text-yellow-300 font-bold shadow-md flex flex-col my-10 rounded-xl justify-center">
+                          <div className="flex flex-col justify-center ">
+                            <h1 className="border-b-2 py-4 mb-10 flex justify-center">
+                              Match du {tournament.date},
+                            </h1>
+                            <label
+                              className="my-2 flex justify-between px-4"
+                              htmlFor="date"
+                            >
+                              Date :
+                              <input
+                                className="text-black shadow-sm ml-4 border-2 rounded-md"
+                                type="text"
+                                id="date"
+                                value={date && date}
+                                name="date"
+                                onChange={(event) =>
+                                  setDate(event.target.value)
+                                }
+                              />
+                            </label>
+                            <label
+                              className="my-2 flex justify-between px-4"
+                              htmlFor="time"
+                            >
+                              Heure :
+                              <input
+                                className="text-black shadow-sm ml-4 border-2 rounded-md"
+                                type="text"
+                                id="time"
+                                value={time && time}
+                                name="time"
+                                onChange={(e) => setTime(e.target.value)}
+                              />
+                            </label>
+                            <label
+                              className="my-2 flex justify-between px-4"
+                              htmlFor="time"
+                            >
+                              Centre :
+                              <input
+                                className="text-black shadow-sm ml-4 border-2 rounded-md"
+                                type="text"
+                                id="time"
+                                value={time && time}
+                                name="time"
+                                onChange={(e) => setTime(e.target.value)}
+                              />
+                            </label>
+                            <label
+                              className="my-2 flex justify-between px-4"
+                              htmlFor="time"
+                            >
+                              Ville :
+                              <input
+                                className="text-black shadow-sm ml-4 border-2 rounded-md"
+                                type="text"
+                                id="time"
+                                value={time && time}
+                                name="time"
+                                onChange={(e) => setTime(e.target.value)}
+                              />
+                            </label>
+                            <label
+                              className="my-2 flex justify-between px-4"
+                              htmlFor="time"
+                            >
+                              Niveau :
+                              <input
+                                className="text-black shadow-sm ml-4 border-2 rounded-md"
+                                type="text"
+                                id="time"
+                                value={time && time}
+                                name="time"
+                                onChange={(e) => setTime(e.target.value)}
+                              />
+                            </label>
 
-                          <div className="flex flex-col justify-center">
-                            <p className="text-sm">hello</p>
-                            <div className="flex justify-around">
-                              <button
-                                className="my-4 w-1/4 items-center rounded-full  text-gray-800 bg-yellow-300 active:bg-gray-800 active:text-yellow-300 shadow-sm shadow-black  "
-                                type="button"
-                                onClick={() => setModal(false)}
-                              >
-                                Annuler
-                              </button>
-                              <button
-                                type="button"
-                                className="my-4 w-2/3 items-center rounded-full  text-gray-800 bg-yellow-300 active:bg-gray-800 active:text-yellow-300 shadow-sm shadow-black  "
-                                onClick={(e) => handleSubmit(e)}
-                              >
-                                Modifier le match
-                              </button>
+                            <div className="flex flex-col justify-center">
+                              <div className="flex justify-around">
+                                <button
+                                  className="my-4 w-1/4 items-center rounded-full  text-gray-800 bg-yellow-300 active:bg-gray-800 active:text-yellow-300 shadow-sm shadow-black  "
+                                  type="button"
+                                  onClick={() => setModal(false)}
+                                >
+                                  Annuler
+                                </button>
+                                <button
+                                  type="button"
+                                  className="my-4 w-2/3 items-center rounded-full  text-gray-800 bg-yellow-300 active:bg-gray-800 active:text-yellow-300 shadow-sm shadow-black  "
+                                  onClick={(e) => handleSubmit(e)}
+                                >
+                                  Modifier le match
+                                </button>
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      </form>
+                        </form>
+                      </div>
                     </div>
+                    {/* <div className="opacity-20 fixed inset-0 z-40 bg-gray-800">
+                    </div> */}
                   </div>
                 ) : null}
               </div>

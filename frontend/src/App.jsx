@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import Home from "./pages/Home";
-import Tournament from "./components/TournamentList";
+import TournamentPage from "./pages/TournamentPage";
 
 import "./App.css";
 
@@ -12,7 +12,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/tournament" element={<Tournament />} />
+          <Route path="/tournament" element={<TournamentPage />} />
         </Routes>
       </Router>
     </div>

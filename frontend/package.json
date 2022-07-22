@@ -10,6 +10,7 @@
     "fix": "prettier --write . && eslint --fix --ext .jsx ."
   },
   "dependencies": {
+    "@headlessui/react": "^1.6.6",
     "autoprefixer": "^10.4.7",
     "axios": "^0.27.2",
     "prop-types": "^15.8.1",
