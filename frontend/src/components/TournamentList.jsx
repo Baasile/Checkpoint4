@@ -2,54 +2,18 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 
 function TournamentList() {
-  const [showModal, setModal] = useState(false);
-  const [date, setDate] = useState("");
-  const [time, setTime] = useState("");
-  const [id, setId] = useState("");
   const [data, setData] = useState([]);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const datab = {
-      id,
-      date,
-      time,
-    };
-    axios
-      .put(`http://localhost:5000/tournament/${id}`, datab)
-      .then(() => {
-        console.warn("Yes", datab);
-      })
-      .catch((error) => {
-        console.warn("No !", error);
-      });
-  };
   useEffect(() => {
     axios
       .get(`http://localhost:5000/tournament`)
       .then((response) => {
         setData(response.data);
-        setId(response.data.id);
-        setDate(response.data.date);
-        setTime(response.data.time);
-        console.log(data);
       })
       .catch((error) => {
         console.warn(error);
       });
   }, []);
-
-  // const updateAPIData = (id) => {
-  //   console.log({ date, time });
-  //   axios
-  //     .put(`http://localhost:5000/tournament/${id}`, { date, time })
-  //     .then((response) => {
-  //       setData(response.data);
-  //     })
-  //     .catch((error) => {
-  //       console.warn(error);
-  //     });
-  // }
 
   return (
     <div className="flex justify-center">
@@ -87,13 +51,6 @@ function TournamentList() {
                         <h2>Libre</h2>
                         <h2>Libre</h2>
                       </div>
-                      {/* <div>
-                        <h2>{tournament.player6}</h2>
-                        <h2>{tournament.player7}</h2>
-                        <h2>{tournament.player8}</h2>
-                        <h2>{tournament.player9}</h2>
-                        <h2>{tournament.player10}</h2>
-                      </div> */}
                     </div>
                   </details>
                   <div />

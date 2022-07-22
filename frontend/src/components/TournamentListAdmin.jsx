@@ -33,33 +33,19 @@ function TournamentListAdmin() {
         setId(response.data.id);
         setDate(response.data.date);
         setTime(response.data.time);
-        console.log(data);
       })
       .catch((error) => {
         console.warn(error);
       });
   }, []);
 
+  // eslint-disable-next-line no-shadow
   const deleteTournament = (id) => {
-    console.log(deleteTournament);
-    console.log(id);
     axios
       .delete(`http://localhost:5000/tournament/${id}`)
-      .then((res) => console.log(res.data))
+      .then((res) => console.warn(res.data))
       .catch((err) => console.error(err));
   };
-
-  // const updateAPIData = (id) => {
-  //   console.log({ date, time });
-  //   axios
-  //     .put(`http://localhost:5000/tournament/${id}`, { date, time })
-  //     .then((response) => {
-  //       setData(response.data);
-  //     })
-  //     .catch((error) => {
-  //       console.warn(error);
-  //     });
-  // }
 
   return (
     <div className="flex justify-center">
@@ -97,13 +83,6 @@ function TournamentListAdmin() {
                         <h2>Libre</h2>
                         <h2>Libre</h2>
                       </div>
-                      {/* <div>
-                        <h2>{tournament.player6}</h2>
-                        <h2>{tournament.player7}</h2>
-                        <h2>{tournament.player8}</h2>
-                        <h2>{tournament.player9}</h2>
-                        <h2>{tournament.player10}</h2>
-                      </div> */}
                     </div>
                   </details>
                   <div />
@@ -125,8 +104,8 @@ function TournamentListAdmin() {
                   </div>
                 </div>
                 {showModal ? (
-                  <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
-                    <div className="relative w-auto my-6 mx-auto max-w-3xl">
+                  <div className="justify-center items-center  flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+                    <div className="relative  w-auto my-6 mx-auto max-w-3xl">
                       <div className="flex justify-center">
                         <form className="border-4 border-yellow-300 bg-gray-800 text-yellow-300 font-bold shadow-md flex flex-col my-10 rounded-xl justify-center">
                           <div className="flex flex-col justify-center ">
@@ -228,14 +207,12 @@ function TournamentListAdmin() {
                         </form>
                       </div>
                     </div>
-                    {/* <div className="opacity-20 fixed inset-0 z-40 bg-gray-800">
-                    </div> */}
                   </div>
                 ) : null}
               </div>
             );
           })}
-      <FormTournament />
+        <FormTournament />
       </div>
     </div>
   );

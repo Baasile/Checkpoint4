@@ -44,8 +44,6 @@ class PlayerController {
   static edit = (req, res) => {
     const player = req.body;
 
-    // TODO validations (length, format...)
-
     player.id = parseInt(req.params.id, 10);
 
     models.player
@@ -65,8 +63,6 @@ class PlayerController {
 
   static add = (req, res) => {
     const player = req.body;
-
-    // TODO validations (length, format...)
 
     models.player
       .insert(player)
