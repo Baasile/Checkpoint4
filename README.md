@@ -1,3 +1,12 @@
+## Concept :
+
+Envie de jouer au foot ? mais tes potes ne sont pas dispo ? 
+Pas de problème, Five Side est là.  Connecte-toi et voit la liste des matchs auquels tu peux participer.
+Les matchs gagnés te rapporteront des points, reviens régulièrement et atteint le sommet du classement ! 
+
+Tu veux organiser un match mais il te manque quelques joueurs ? 
+Pas de soucis non plus, sur Five Side tu peux créér un match, les joueurs de la communauté pourront compléter ton équipe.  
+
 ## Ressources : 
 
 DB schema : https://ibb.co/Mh0cwDj
